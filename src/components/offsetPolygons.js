@@ -4,13 +4,8 @@ import { Clipper } from 'clipsy'
 // jtRound: 1,
 // jtMiter: 2
 
-const implementation = ({ POINTS, DELTA = 1, MITERLIMIT = 2, JOINTYPE = 0, AUTOFIX = true } = {}) => {
+const implementation = ({ POINTS, DELTA, MITERLIMIT, JOINTYPE, AUTOFIX } = {}) => {
   let clipper = new Clipper()
-  // switch (JOINTYPE) {
-  //   case "SQUARE" 0
-  //   case "ROUND" 1
-  //   case "MITER" 2
-  // }
   const offsetPoints = clipper.OffsetPolygons(
     [POINTS], DELTA, JOINTYPE, MITERLIMIT, AUTOFIX
   )[0]
@@ -22,11 +17,11 @@ const spec = {
   description: 'enlarges or shrinks a polygon',
   implementation,
   inputs: {
-    POINTS: {},
-    DELTA: {},
-    MITERLIMIT: {},
-    JOINTYPE: {},
-    AUTOFIX: true
+    POINTS: { default: {} },
+    DELTA: { default: 1 },
+    MITERLIMIT: { default: 2 },
+    JOINTYPE: { default: 0 },
+    AUTOFIX: { default: true }
   },
   outputs: {
     POINTS: {}
